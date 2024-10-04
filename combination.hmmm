@@ -9,6 +9,8 @@
 ################################################################################
 # r0 <- 0
 # r1 <- n
+# r2 <- k
+# r3, r4, r5, r6, r7 <- temporary registers
 
 # HMMMM pre-defined registers
 # r13 Function return value
@@ -20,6 +22,6 @@
 ################################################################################
 # read n, print n, and stop
 ################################################################################
-0 read  r1 # read n
-1 write r1 # print n
-2 halt     # stop the program
+0 read r1 # read n
+1 read r2 # read k
+2 halt
