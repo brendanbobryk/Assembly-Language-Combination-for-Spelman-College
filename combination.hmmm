@@ -20,8 +20,37 @@
 # STUIDENTS NEED TO ADD THEIR OWN ASSEMBLY CODE HERE
 
 ################################################################################
-# read n, print n, and stop
+# main
 ################################################################################
+
+setn r15 1000 # sets the stack pointer to the address after usable memory
+
 0 read r1 # read n
 1 read r2 # read k
-2 halt
+
+# validate input, n and k are both > 0
+2 jlezn r1 error_n # if n <=0, jump to error
+3 jlezn r2 error_k # if k <=0, jump to error
+
+# calculate numerator
+4 setn r3 1  # initialize result to 1
+5 setn r4 2  # initialize loop counter to 2
+
+6 mul r3 r3 r4 # multiply result by i until i > n
+7 addn r4 1
+8 jlt r4 r1 6
+
+# calculate denominator
+9 sub r5 r1 r2  # n - k
+10 calln factorial  # call factorial function for k
+11 copy r6 r13  # store k! in r6
+12 calln factorial  # call factorial function for (n-k)
+13 mul r7 r6 r13  # multiply k! and (n-k)!
+14 div r13 r3 r7  # calculate C(n,k)
+
+15 write r13 # print the result
+16 halt
+
+################################################################################
+# factorial function
+################################################################################
