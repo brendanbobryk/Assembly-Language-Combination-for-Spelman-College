@@ -7,9 +7,6 @@ using namespace std;
  */
 uint16_t factorial(const uint16_t x)
 {
-    if (x == 1)
-        return 1; // 1! is 1
-
     uint16_t value = 1;
     for (uint16_t i = 2; i <= x; ++i)
         value *= i;
