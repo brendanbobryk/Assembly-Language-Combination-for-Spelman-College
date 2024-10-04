@@ -11,6 +11,7 @@
 # r1 <- n
 # r2 <- k
 # r3, r4, r5, r6, r7 <- temporary registers
+# r8 <- -1 for error
 
 # HMMMM pre-defined registers
 # r13 Function return value
@@ -23,14 +24,14 @@
 # main
 ################################################################################
 
-setn r15 1000 # sets the stack pointer to the address after usable memory
+# setn r15 1000 # sets the stack pointer to the address after usable memory
 
 0 read r1 # read n
 1 read r2 # read k
 
 # validate input, n and k are both > 0
-2 jlezn r1 error_n # if n <=0, jump to error
-3 jlezn r2 error_k # if k <=0, jump to error
+2 jltzn r1 26 # if n <=0, jump to error
+3 jltzn r2 26 # if k <=0, jump to error
 
 # calculate numerator
 4 setn r3 1  # initialize result to 1
@@ -54,3 +55,22 @@ setn r15 1000 # sets the stack pointer to the address after usable memory
 ################################################################################
 # factorial function
 ################################################################################
+
+17 factorial:
+    18 read r1  # read input (x)
+    19 setn r3 1  # initialize result to 1
+    20 setn r4 2  # initialize loop counter to 2
+
+    21 mul r3 r3 r4 # multiply result by i until i > x
+    22 addn r4 1
+    23 jlt r4 r1 20
+
+    24 copy r13 r3 # return the result
+    25 ret 
+
+################################################################################
+# error handling
+################################################################################
+26 setn r8 -1 # sets r8 to -1 for error
+27 write r8  # print error result
+28 halt
