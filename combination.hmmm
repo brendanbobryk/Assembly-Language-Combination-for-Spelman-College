@@ -30,8 +30,8 @@
 1 read r2 # read k
 
 # validate input, n and k are both > 0
-2 jltzn r1 26 # if n <=0, jump to error
-3 jltzn r2 26 # if k <=0, jump to error
+2 jltzn r1 24 # if n <=0, jump to error
+3 jltzn r2 24 # if k <=0, jump to error
 
 # calculate numerator
 4 setn r3 1  # initialize result to 1
@@ -39,13 +39,13 @@
 
 6 mul r3 r3 r4 # multiply result by i until i > n
 7 addn r4 1
-8 jlt r4 r1 6
+8 jgtzn r1 6 # jump if r1 (n) > r4 (loop counter)
 
 # calculate denominator
 9 sub r5 r1 r2  # n - k
-10 calln factorial  # call factorial function for k
+10 calln r14, 23 # call the factorial function
 11 copy r6 r13  # store k! in r6
-12 calln factorial  # call factorial function for (n-k)
+12 calln r14, 23  # call factorial function for (n-k)
 13 mul r7 r6 r13  # multiply k! and (n-k)!
 14 div r13 r3 r7  # calculate C(n,k)
 
@@ -56,21 +56,19 @@
 # factorial function
 ################################################################################
 
-17 factorial:
-    18 read r1  # read input (x)
-    19 setn r3 1  # initialize result to 1
-    20 setn r4 2  # initialize loop counter to 2
+17 read r1  # read input (x)
+18 setn r3 1  # initialize result to 1
+19 setn r4 2  # initialize loop counter to 2
 
-    21 mul r3 r3 r4 # multiply result by i until i > x
-    22 addn r4 1
-    23 jlt r4 r1 20
+20 mul r3 r3 r4 # multiply result by i until i > x
+21 addn r4 1
+22 jgtzn r1 22
 
-    24 copy r13 r3 # return the result
-    25 ret 
+23 copy r13 r3 # return the result
 
 ################################################################################
 # error handling
 ################################################################################
-26 setn r8 -1 # sets r8 to -1 for error
-27 write r8  # print error result
-28 halt
+24 setn r8 -1 # sets r8 to -1 for error
+25 write r8  # print error result
+26 halt
