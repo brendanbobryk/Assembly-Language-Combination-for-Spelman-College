@@ -7,8 +7,14 @@ using namespace std;
  */
 uint16_t factorial(const uint16_t x)
 {
+    if (x == 1)
+        return 1; // 1! is 1
 
-    return x;
+    uint16_t value = 1;
+    for (uint16_t i = 2; i <= x; ++i)
+        value *= i;
+
+    return value;
 }
 
 /*
@@ -26,7 +32,7 @@ int main()
     cin >> k;
     if (n <= 0 || k <= 0)
     {
-        cout << "Invalid input. Please only enter positive integers." << endl;
+        cout << "result = -1" << endl;
         return -1;
     }
 
