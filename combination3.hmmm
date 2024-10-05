@@ -1,5 +1,5 @@
-setn r1, 5           # Read n from user (input)
-setn r2, 2           # Read k from user (input)
+read r1           # Read n from user (input)
+read r2           # Read k from user (input)
 jltzn r1, 32      # If n <= 0, jump to error handling
 jltzn r2, 32      # If k <= 0, jump to error handling
 
