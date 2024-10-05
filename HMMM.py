@@ -188,7 +188,8 @@ def main(program = None):
         if args['HMMM-SOURCE'] is None:
             args['HMMM-SOURCE'] = args['HMMM-BINARY']
         if args['HMMM-SOURCE'] is None:
-            args['HMMM-SOURCE'] = input('Enter input file name: ')
+            # args['HMMM-SOURCE'] = input('Enter input file name: ')
+            args['HMMM-SOURCE'] = "combination3_num.hmmm"
         program = readFile(args['HMMM-SOURCE'])
 
     if not isMachineCode(program):
